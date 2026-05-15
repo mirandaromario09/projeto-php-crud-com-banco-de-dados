@@ -1,63 +1,50 @@
-# Página de Login na Prática
+# Sistema de Login em PHP + MySQL
 
-Sistema de login simples em PHP com autenticação via banco de dados MySQL.
+Um sistema de login completo com cadastro, edição e exclusão de usuários. Projeto desenvolvido para aprender os fundamentos do PHP com banco de dados.
 
 ## Funcionalidades
 
-- Formulário de login com usuário e senha
-- Verificação de credenciais no banco de dados
-- Sessão para controle de acesso
-- Página restrita (dashboard) protegida contra acesso não autorizado
-- Mensagem de erro para credenciais inválidas
+- Cadastro de usuário (nome, email, senha)
+- Login com email e senha
+- Dashboard protegida (só acessa se estiver logado)
+- Editar dados da conta
+- Excluir conta
 
-## Pré-requisitos
+## Tecnologias
 
-- XAMPP (Apache + MySQL) ou similar
-- Navegador web
+- PHP com MySQL (mysqli procedural)
+- MySQL
+- HTML + CSS
 
 ## Como usar
 
-1. Coloque a pasta do projeto em `C:\xampp\htdocs\projphp\pagina_login_na_pratica\`
-
-2. Inicie o Apache e o MySQL no XAMPP Control Panel
-
-3. Acesse o phpMyAdmin e execute o SQL abaixo para criar o banco e a tabela:
+1. Inicie o Apache e MySQL (XAMPP, WAMP, etc.)
+2. Crie o banco de dados no phpMyAdmin:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS sistema_login;
-USE sistema_login;
+CREATE DATABASE sistema_login;
 
-CREATE TABLE IF NOT EXISTS usuarios (
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario VARCHAR(50) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
 );
-
-INSERT INTO usuarios (usuario, senha) VALUES ('admin', '123');
 ```
 
-4. Acesse no navegador:
+3. Coloque a pasta do projeto no `htdocs` (ou www)
+4. Acesse no navegador: `http://localhost/pagina_login_na_pratica/login.php`
+
+## Estrutura
 
 ```
-http://localhost/projphp/pagina_login_na_pratica/login.php
-```
-
-5. Faça login com:
-   - **Usuário:** admin
-   - **Senha:** 123
-
-## Estrutura do projeto
-
-```
-├── login.php            # Página de login (formulário)
-├── verificar_login.php  # Lógica de verificação (consulta ao banco)
-├── dashboard.php        # Página restrita (pós-login)
-└── README.md
-```
-
-## Fluxo
-
-```
-login.php → verificar_login.php → dashboard.php (se acertar)
-                                → login.php?erro=1 (se errar)
+├── login.php                # Formulário de login
+├── verificar_login.php      # Valida o login
+├── cadastro.php             # Formulário de cadastro
+├── verificar_cadastro.php   # Processa o cadastro
+├── dashboard.php            # Página protegida (após login)
+├── editar_cadastro.php      # Formulário de edição
+├── verificar_edicao.php     # Processa a edição
+├── excluir_cadastro.php     # Exclui a conta
+└── style.css                # Estilo visual
 ```
